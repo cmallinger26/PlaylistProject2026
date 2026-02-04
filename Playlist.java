@@ -39,29 +39,47 @@ public class Playlist {
     public void addSong(Song newSong) {
         songs.add(newSong);
     }
-public void examine(){
-    for(Song s : songs){
-        System.out.println(s.toString());
-    }
-}
-public void examineLiked(){
-    for(Song s: songs){
-        if(s.getLiked()){
-            System.out.println(s.toString());
+     public void printAllSongs() {
+        for (int i = 0; i < songs.size(); i++) {
+            System.out.println(songs.get(i));
         }
     }
-}
+    public void printLikedSongs() {
+        for (int i = 0; i < songs.size(); i++) {
+            Song current = songs.get(i);
 
-    public void likeSong(){
-        liked = true;
+            if (current.getLiked() == true) {
+                System.out.println(current);
+            }
+        }
     }
-    public void dislikeSong(){
-        liked = false;
+     public void likeSong(int position){
+        if(position >= 0 && position < songs.size()){
+            songs.get(position).like();
+        }
     }
-    public int totalDuration(){
-        int totalDuration = 0;
-        for (Song s : songs){
-            totalDuration += s.getMinutes; 
-        } 
-    } 
+    public void removeSong(int index) {
+        if (index >= 0 && index < songs.size()) {
+            songs.remove(index);
+        }
+    }
+         public String totalDuration() {
+
+        int totalSeconds = 0;
+
+        for (int i = 0; i < songs.size(); i++) {
+            Song s = songs.get(i);
+
+            int addedtime = s.getMinutes() * 60 + s.getSeconds();
+            totalSeconds = totalSeconds + addedtime;
+        }
+        return ("Total Duration: " + totalSeconds);
+    }
+    public void removeUnlikedSongs() {
+        for(int i = songs.size()-1; i>=0; i--){
+            if(songs.get(i).getLiked() == false){
+                songs.remove(i);
+            }
+        }
+    }
 }

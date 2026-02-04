@@ -39,7 +39,7 @@ public class Song {
         return title;
      }
 
-     public String getArtists(){
+     public String getArtist(){
         return artist;
      }
 
